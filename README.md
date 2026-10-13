@@ -1,24 +1,17 @@
 # HDR Media Solutions
 
-Single-page static site. Serve `dist/` with any static HTTP server. No build required.
+Static, single-page website. Serve `dist/`; no frontend build is required.
 
-Black, silver and brand yellow (#FFDB15) design, Bootstrap grid containers, GSAP 3.13 + ScrollTrigger, Splide 4.1.4, GLightbox 3.3.1. Libraries are vendored locally with their original license headers. Supporting scripts load on demand. Native touch scrolling is supported. Motion is always enabled as requested.
+Brand accent: #FFDB15. Motion runs on desktop and mobile. Wheel and touch scrolling are native; only navigation clicks request smooth scrolling. Continuous animation pauses off-screen and in hidden tabs to save processing.
 
-Content and assets: supplied pitch deck and logo, plus the existing HDR website and its portfolio stills. All 22 client logos from the deck appear in the expandable client network. Production photographs and all six existing portfolio thumbnails are included. Duplicate logos, the deck's decorative background, stock portrait and QR code are not used as website content. No pricing or performance quantities are shown.
+## Content status
+The current layout is Hero → Expertise → animated service strip → expanded Brands placeholder → Showreel placeholder → Testimonials → Contact → Footer. Header branding, navigation and body type are larger for readability. The hero uses an abstract animated graphic until the owner supplies approved imagery.
 
-Showreel loads from the existing HDR media URL only when requested. Portfolio stills open in an image lightbox: the source site did not provide individual project video links. Contact actions use the phone number in the deck, with direct calling and WhatsApp. No fake form submission or backend.
+The old portfolio, client list/logos, production photographs, showreel and all studio claims have been removed. Unapproved media files are also absent from the deployed assets. Existing testimonial text remains, without client-logo images. No phone number is published in the HTML, structured data, or contact links.
 
-Source references:
-- https://hdrmediasolutions.co.za/
-- https://hdrmediasolutions.co.za/portfolio/
-- https://aixor-react.vercel.app/
-- https://www.rockermedia.co.za/ (reference could not be fetched reliably)
+WhatsApp, email, social channels, Privacy Policy and Terms of Service are clearly marked placeholders. Contact buttons are disabled; no email address, link or legal text has been invented. Awaiting the owner's approved hero imagery, project media/links, current brand names and high-resolution logos, showreel, contact URLs and policy content. The expanded brand section and showreel have clearly marked empty states until their approved replacements arrive.
 
-For public client launch, confirm the supplied client-logo permissions, final portfolio titles, and media availability. Current deployment is owner-private for review.
-
-Revision 2: kinetic hero with rotating orbits, floating photographic collage, cycling headline, oversized HDR wordmark, continuous client and creative marquees, colour photography, scroll parallax and image reveals, accent-colour contact panel and pointer interactions. Motion is always enabled as requested.
-
-Revision 3: brand yellow #FFDB15 throughout the UI, including rings and glows. Search metadata, canonical URL, Open Graph/Twitter previews, Organization/WebSite JSON-LD, robots.txt and sitemap.xml target https://hdrmediasolutions.co.za/. Portfolio and client content are shipped as static HTML. All images have dimensions and async decoding; below-fold images use native lazy loading. The showreel remains click-to-load. GSAP infinite loops pause outside the viewport and in hidden tabs; mobile reveals use transforms and opacity. Motion is always enabled as requested.
+Locally hosted libraries include GSAP with ScrollTrigger and a lazy-loaded Splide testimonial slider. Unused gallery/scroll libraries are retained as optional assets, but are not loaded by the page.
 
 ## Public launch and search
 Upload the contents of `dist/` to the root of hdrmediasolutions.co.za, with HTTPS. The existing WordPress site has not been replaced. The private review deployment requires sign-in and cannot be indexed by Google. The canonical, sitemap and social image URL are configured for the client's domain; update these together if the final domain changes. Verify the domain in Google Search Console, submit `/sitemap.xml`, and inspect the homepage after launch. Rankings or traffic improvements are not guaranteed.
