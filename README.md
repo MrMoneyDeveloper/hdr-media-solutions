@@ -2,7 +2,7 @@
 
 Single-page static site. Serve `dist/` with any static HTTP server. No build required.
 
-Black, silver and brand yellow (#FFDB15) design, Bootstrap grid containers, GSAP 3.13 + ScrollTrigger, Lenis 1.3.11, Splide 4.1.4, GLightbox 3.3.1. Libraries are vendored locally with their original license headers. Supporting scripts load on demand. Native touch scrolling and reduced-motion preferences are supported.
+Black, silver and brand yellow (#FFDB15) design, Bootstrap grid containers, GSAP 3.13 + ScrollTrigger, Lenis 1.3.11, Splide 4.1.4, GLightbox 3.3.1. Libraries are vendored locally with their original license headers. Supporting scripts load on demand. Native touch scrolling is supported. Motion is always enabled as requested.
 
 Content and assets: supplied pitch deck and logo, plus the existing HDR website and its portfolio stills. All 22 client logos from the deck appear in the expandable client network. Production photographs and all six existing portfolio thumbnails are included. Duplicate logos, the deck's decorative background, stock portrait and QR code are not used as website content. No pricing or performance quantities are shown.
 
