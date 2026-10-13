@@ -1,0 +1,14 @@
+{
+  "name": "hdr-media-solutions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HDR Media Solutions single-page website for Cloudflare Pages",
+  "scripts": {
+    "check": "node --check dist/app.js",
+    "preview": "wrangler pages dev dist",
+    "deploy": "wrangler pages deploy dist --project-name hdr-media-solutions"
+  },
+  "devDependencies": {
+    "wrangler": "4.150.0"
+  }
+}
