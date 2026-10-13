@@ -38,6 +38,13 @@ footer{flex-wrap:wrap;padding-top:40px;padding-bottom:40px;gap:30px}footer .bran
 
 @media(min-width:601px) and (max-width:800px){.header nav{display:none;position:absolute;left:0;right:0;top:108px;background:#111;padding:25px;flex-direction:column;gap:24px;font-size:18px;border-bottom:1px solid #444}.header nav.open{display:flex}.menu{display:block;border:0;background:none;color:#eee;font-size:26px}.header-cta{margin-left:auto;margin-right:25px}}
 
-.approved-brand-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:40px}.approved-brand{display:flex;align-items:center;justify-content:center;min-height:185px;padding:26px;border:1px solid #555;border-radius:4px;overflow:hidden}.approved-brand img{width:100%;height:130px;object-fit:contain;filter:none;mix-blend-mode:normal}.approved-brand.logo-light{background:#f3f3ef;border-color:#d5d5d0}.approved-brand.logo-dark{background:#151516;border-color:#555}.approved-brand:last-child:nth-child(4n+3){grid-column:auto}.approved-showcase{padding-bottom:75px}
+.approved-brand-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:40px}.approved-brand{display:flex;align-items:center;justify-content:center;min-height:185px;padding:26px;border:1px solid #555;border-radius:4px;overflow:hidden}.approved-brand img{width:100%;height:130px;object-fit:contain;filter:none;mix-blend-mode:normal}.approved-brand:last-child:nth-child(4n+3){grid-column:auto}.approved-showcase{padding-bottom:75px}
 @media(max-width:991px){.approved-brand-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.approved-brand{min-height:155px;padding:20px}.approved-brand img{height:115px}}
 @media(max-width:600px){.approved-brand-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:30px}.approved-brand{min-height:135px;padding:16px}.approved-brand img{height:100px}.approved-showcase{padding-bottom:60px}}
+
+/* A single monochrome treatment gives every supplied transparent mark the same presentation. */
+.approved-brand{background:#151516;border-color:#505052}.approved-brand img{filter:grayscale(1) invert(1) brightness(1.2)}
+.email-actions{display:flex;flex-direction:column;align-items:flex-start;gap:14px;max-width:520px}.email-cta{border:0;font-size:18px}.contact-email{font-size:18px;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}.contact-bottom .email-help{font-size:14px;margin:0;color:#4d4100}.social-links>div{display:flex;gap:18px;margin-top:9px;font-size:14px}.social-links a{text-decoration:underline;text-underline-offset:4px}.social-links a:hover{color:#FFDB15}.pending-playlist{color:#bbb}
+@media(max-width:600px){.email-actions{width:100%;gap:16px}.email-cta{font-size:17px;padding:18px 24px}.contact-email{font-size:16px}.contact-bottom .email-help{font-size:14px;margin:0}.social-links>div{gap:16px;font-size:14px}}
+
+.approved-brand img.brand-native{filter:grayscale(1) brightness(1.2)}

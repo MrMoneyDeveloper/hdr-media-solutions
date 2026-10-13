@@ -7,9 +7,9 @@ Brand accent: #FFDB15. Motion runs on desktop and mobile. Wheel and touch scroll
 ## Content status
 The current layout is Hero → Expertise → animated service strip → expanded Brands showcase → Showreel placeholder → Testimonials → Contact → Footer. Header branding, navigation and body type are larger for readability. The hero uses an abstract animated graphic until the owner supplies approved imagery.
 
-The old portfolio, client list/logos, production photographs, showreel and all studio claims have been removed. The new Brands showcase contains all 39 brand-logo files from the owner-supplied logo PNG.zip; its HDR logo is used for site branding. Logos retain their colours, are trimmed to remove empty transparent padding, encoded losslessly to WebP, and lazy-loaded on contrasting cards. Unapproved media files are also absent from the deployed assets. Existing testimonial text remains, without client-logo images. No phone number is published in the HTML, structured data, or contact links.
+The old portfolio, client list/logos, production photographs, showreel and all studio claims have been removed. The new Brands showcase contains all 39 brand-logo files from the owner-supplied logo PNG.zip; its HDR logo is used for site branding. Logos retain their colours, are trimmed to remove empty transparent padding, optimized as transparent PNGs, and lazy-loaded on uniform dark cards with a consistent monochrome display treatment; the PNG files retain their original colours. Unapproved media files are also absent from the deployed assets. Existing testimonial text remains, without client-logo images. No phone number is published in the HTML, structured data, or contact links.
 
-WhatsApp, email, social channels, Privacy Policy and Terms of Service are clearly marked placeholders. Contact buttons are disabled; no email address, link or legal text has been invented. Awaiting the owner's approved hero imagery, project media/links, showreel, contact URLs and policy content. The updated showreel remains a clearly marked placeholder until its approved replacement arrives.
+WhatsApp has been removed. Contact uses a working mailto link to Hiresh.Ravjee@hdrmediasolutions.co.za, with a clear notice that it opens the visitor's email app. This is not a server-side email form and no message is sent automatically. Instagram and Facebook URLs are linked from the footer and were recovered from the old site. Privacy Policy, Terms of Service and the proposed YouTube playlist remain placeholders; no policy text or playlist has been invented. Awaiting approved hero imagery, project media/links, updated showreel, selected playlist URL and policy content. The updated showreel remains a clearly marked placeholder until its approved replacement arrives.
 
 Locally hosted libraries include GSAP with ScrollTrigger and a lazy-loaded Splide testimonial slider. Unused gallery/scroll libraries are retained as optional assets, but are not loaded by the page.
 
@@ -33,3 +33,9 @@ Motion runs by default on desktop and mobile, even when the device requests redu
 Google indexing starts only after public launch on hdrmediasolutions.co.za; the Sites review remains private. Follow the public-launch steps above after Cloudflare DNS/custom-domain setup. No Cloudflare account or DNS changes have been made in this task.
 
 Scroll fix: wheel/touch use native scrolling. Only explicit anchor clicks request smooth movement. Global CSS smooth scrolling and the Lenis controller are disabled, avoiding competing scroll writes during ScrollTrigger layout refreshes and lazy slider initialization. Mobile address-bar resizes do not rebuild scroll effects. Fine photo borders and slightly increased portfolio spacing are included.
+
+Verified old-site social URLs:
+- https://www.instagram.com/hdrmediasolutions/
+- https://www.facebook.com/hdrmediasolutions
+
+The old homepage's outgoing links and WordPress public page index did not contain Privacy Policy or Terms of Service pages when checked on 2026-10-13. Keep the placeholders until the client provides approved URLs or text. The playlist is a footer placeholder only; do not add arbitrary YouTube videos or old portfolio links. Direct form-to-inbox delivery would require a mail provider or configured backend.
