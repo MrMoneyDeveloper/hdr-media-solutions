@@ -5,11 +5,11 @@ Static, single-page website. Serve `dist/`; no frontend build is required.
 Brand accent: #FFDB15. Motion runs on desktop and mobile. Wheel and touch scrolling are native; only navigation clicks request smooth scrolling. Continuous animation pauses off-screen and in hidden tabs to save processing.
 
 ## Content status
-The current layout is Hero → Expertise → animated service strip → expanded Brands placeholder → Showreel placeholder → Testimonials → Contact → Footer. Header branding, navigation and body type are larger for readability. The hero uses an abstract animated graphic until the owner supplies approved imagery.
+The current layout is Hero → Expertise → animated service strip → expanded Brands showcase → Showreel placeholder → Testimonials → Contact → Footer. Header branding, navigation and body type are larger for readability. The hero uses an abstract animated graphic until the owner supplies approved imagery.
 
-The old portfolio, client list/logos, production photographs, showreel and all studio claims have been removed. Unapproved media files are also absent from the deployed assets. Existing testimonial text remains, without client-logo images. No phone number is published in the HTML, structured data, or contact links.
+The old portfolio, client list/logos, production photographs, showreel and all studio claims have been removed. The new Brands showcase contains all 39 brand-logo files from the owner-supplied logo PNG.zip; its HDR logo is used for site branding. Logos retain their colours, are trimmed to remove empty transparent padding, encoded losslessly to WebP, and lazy-loaded on contrasting cards. Unapproved media files are also absent from the deployed assets. Existing testimonial text remains, without client-logo images. No phone number is published in the HTML, structured data, or contact links.
 
-WhatsApp, email, social channels, Privacy Policy and Terms of Service are clearly marked placeholders. Contact buttons are disabled; no email address, link or legal text has been invented. Awaiting the owner's approved hero imagery, project media/links, current brand names and high-resolution logos, showreel, contact URLs and policy content. The expanded brand section and showreel have clearly marked empty states until their approved replacements arrive.
+WhatsApp, email, social channels, Privacy Policy and Terms of Service are clearly marked placeholders. Contact buttons are disabled; no email address, link or legal text has been invented. Awaiting the owner's approved hero imagery, project media/links, showreel, contact URLs and policy content. The updated showreel remains a clearly marked placeholder until its approved replacement arrives.
 
 Locally hosted libraries include GSAP with ScrollTrigger and a lazy-loaded Splide testimonial slider. Unused gallery/scroll libraries are retained as optional assets, but are not loaded by the page.
 
