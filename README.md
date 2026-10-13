@@ -25,12 +25,15 @@ Upload the contents of `dist/` to the root of hdrmediasolutions.co.za, with HTTP
 
 No build needed. For local preview: `python -m http.server 4173 --directory dist` then open http://localhost:4173. The source ZIP includes the static files, locally hosted libraries and README, without hosting credentials or Git metadata.
 
-## Cloudflare Pages
-Connect the public GitHub repository in Cloudflare Pages. Production branch: `main`. Framework preset: None. Build command: leave empty. Build output directory: `dist`. This is a static deployment; no database, Worker or environment secrets are required.
+## Cloudflare Workers (default)
+The default `wrangler.jsonc` deploys `dist/` with Workers Static Assets. It supports the existing Workers Builds setup: production branch `main`, root directory `/`, build command blank, deploy command `npx wrangler deploy`. No application secrets or build variables are needed. Cloudflare's build token is managed by the dashboard.
 
-Optional CLI: `npm install`, then `npm run preview` or `npm run deploy`. `wrangler.jsonc` pins the static output configuration. Deploy requires your Cloudflare account login and a Pages project named `hdr-media-solutions`.
+Local commands: `npm ci`, `npm run check`, `npm run deploy:check` (validates without publishing), `npm run preview`, and `npm run deploy` (requires Cloudflare authentication). No Worker JavaScript entry point is needed for this static site. Unknown URLs return the branded 404 page.
 
-`dist/_headers` adds security headers and caching for locally hosted, version-pinned vendors and media. HTML stays revalidated. `dist/_redirects` maps the former multipage paths to sections of the single page. There is no catch-all SPA redirect; missing files keep a real 404.
+## Cloudflare Pages (optional)
+Pages configuration is preserved separately in `wrangler.pages.jsonc`. For Git integration: branch `main`, framework None, build command blank, output `dist`. For CLI: `npm run preview:pages` or `npm run deploy:pages`.
+
+`dist/_headers` provides security headers and cache policy for both Workers Static Assets and Pages. Versioned library filenames have immutable caching; media uses bounded caching and HTML is revalidated. `dist/_redirects` redirects legacy multipage routes to single-page sections.
 
 Motion runs by default on desktop and mobile, even when the device requests reduced motion, as requested by the site owner. Continuous animations pause outside their section and when the tab is hidden, then resume automatically. The control to disable motion has been removed. The site works without JavaScript; galleries and animation are progressive enhancements.
 

@@ -2,11 +2,14 @@
   "name": "hdr-media-solutions",
   "version": "1.0.0",
   "private": true,
-  "description": "HDR Media Solutions single-page website for Cloudflare Pages",
+  "description": "HDR Media Solutions static website for Cloudflare Workers and Pages",
   "scripts": {
     "check": "node --check dist/app.js",
-    "preview": "wrangler pages dev dist",
-    "deploy": "wrangler pages deploy dist --project-name hdr-media-solutions"
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:check": "wrangler deploy --dry-run --outdir .wrangler/dryrun",
+    "preview:pages": "wrangler pages dev dist --config wrangler.pages.jsonc",
+    "deploy:pages": "wrangler pages deploy dist --project-name hdr-media-solutions --config wrangler.pages.jsonc"
   },
   "devDependencies": {
     "wrangler": "4.150.0"
