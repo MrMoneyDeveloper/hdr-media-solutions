@@ -1,6 +1,7 @@
 const grid=document.querySelector('#work-grid');
 document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>{const active=b===button;b.classList.toggle('active',active);b.setAttribute('aria-pressed',active)});document.querySelectorAll('.work-item').forEach(item=>item.hidden=button.dataset.filter!=='all'&&item.dataset.category!==button.dataset.filter);window.ScrollTrigger?.refresh()}));
 const menu=document.querySelector('.menu'),nav=document.querySelector('nav');menu.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',open);menu.setAttribute('aria-label',open?'Close menu':'Open menu');menu.textContent=open?'✕':'☰'});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open menu');menu.textContent='☰'}));
+document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{const hash=link.getAttribute('href');if(!hash||hash==='#')return;const target=document.getElementById(hash.slice(1));if(!target)return;event.preventDefault();history.pushState(null,'',hash);target.scrollIntoView({behavior:'smooth',block:'start'})}));
 const logoBox=document.querySelector('.featured-logos'),logoTrack=document.createElement('div');logoTrack.className='logo-track';[...logoBox.children].forEach(el=>logoTrack.append(el));[...logoTrack.children].forEach(el=>{const clone=el.cloneNode(true);clone.alt='';clone.setAttribute('aria-hidden','true');logoTrack.append(clone)});logoBox.append(logoTrack);
 const loaded=new Map();function loadScript(src){if(loaded.has(src))return loaded.get(src);const promise=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.append(s)});loaded.set(src,promise);return promise}function loadStyle(href){if(document.querySelector(`link[href="${href}"]`))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.append(l)}
 function near(element,callback){const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer.disconnect();callback()}},{rootMargin:'350px'});observer.observe(element)}
@@ -9,7 +10,7 @@ near(grid,()=>setupGallery().catch(()=>{}));
 near(document.querySelector('#testimonials'),async()=>{try{loadStyle('vendor/splide.6405c89826.css');await loadScript('vendor/splide.159b16ec7d.js');new Splide('.splide',{type:'slide',perPage:1,arrows:true,pagination:false,autoplay:false,speed:650,reducedMotion:{speed:650}}).mount()}catch{document.querySelectorAll('.splide__slide').forEach(s=>s.style.display='block')}});
 const dialog=document.querySelector('#video-dialog'),video=dialog.querySelector('video'),status=document.querySelector('#video-status');document.querySelector('#reel').addEventListener('click',()=>{dialog.showModal();video.src='https://hdrmediasolutions.co.za/wp-content/uploads/2024/10/Untitled-Project-1.mp4';video.load();video.play().catch(()=>{});status.textContent=''});document.querySelector('#close-video').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});dialog.addEventListener('close',()=>{video.pause();video.removeAttribute('src');video.load();document.querySelector('#reel').focus()});video.addEventListener('error',()=>{status.textContent='The showreel could not load. Please try again or contact HDR on WhatsApp.'});
 const motionEnabled=true, motionOverride=true;let motionContext;
-async function animate(){if(!motionEnabled)return;try{await loadScript('vendor/gsap.96c01b81f4.js');await loadScript('vendor/scrolltrigger.308219390e.js');gsap.registerPlugin(ScrollTrigger);if(!motionEnabled)return;motionContext=gsap.matchMedia();motionContext.add(motionOverride?'(min-width: 0px)':'(prefers-reduced-motion: no-preference)',()=>{
+async function animate(){if(!motionEnabled)return;try{await loadScript('vendor/gsap.96c01b81f4.js');await loadScript('vendor/scrolltrigger.308219390e.js');gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});if(!motionEnabled)return;motionContext=gsap.matchMedia();motionContext.add(motionOverride?'(min-width: 0px)':'(prefers-reduced-motion: no-preference)',()=>{
  gsap.from('.hero-copy .line',{y:95,rotation:5,opacity:0,duration:1.3,stagger:.13,ease:'power4.out'});
  gsap.from('.kinetic-art',{scale:.65,rotation:-12,opacity:0,duration:1.5,ease:'power3.out'});
  const kinetic=gsap.timeline({repeat:-1});kinetic.to('.orbit-one',{rotation:'+=360',duration:26,ease:'none'},0).to('.orbit-two',{rotation:'-=360',duration:34,ease:'none'},0).to('.orbit-three',{rotation:'+=180',duration:26,ease:'none'},0);
@@ -21,20 +22,20 @@ async function animate(){if(!motionEnabled)return;try{await loadScript('vendor/g
  govern('.hero-stage',[kinetic,float,cross,wordTimer]);
  const logoLoop=gsap.to('.logo-track',{xPercent:-50,duration:25,repeat:-1,ease:'none'});govern('.featured-logos',[logoLoop]);
  const marqueeLoop=gsap.to('.marquee div',{xPercent:-50,duration:22,repeat:-1,ease:'none'});govern('.marquee',[marqueeLoop]);
- gsap.utils.toArray('.section-heading h2,.about-copy h2,.contact h2').forEach(el=>gsap.from(el,{y:80,rotation:2,opacity:.05,duration:1.2,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 95%'}}));
- gsap.utils.toArray('.work-image').forEach((el,i)=>gsap.from(el,{...(matchMedia('(min-width: 992px)').matches?{clipPath:'inset(35% 0 35% 0)'}:{y:35,opacity:0}),rotation:i%2?4:-4,scale:.9,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 94%'}}));
- gsap.from('.featured-logos img',{y:40,opacity:0,stagger:.12,duration:.8,scrollTrigger:{trigger:'.featured-logos',start:'top 95%'}});
+ gsap.utils.toArray('.section-heading h2,.about-copy h2,.contact h2').forEach(el=>gsap.from(el,{y:80,rotation:2,opacity:.05,duration:1.2,ease:'power4.out',scrollTrigger:{trigger:el,start:'top 95%',once:true}}));
+ gsap.utils.toArray('.work-image').forEach((el,i)=>gsap.from(el,{...(matchMedia('(min-width: 992px)').matches?{clipPath:'inset(35% 0 35% 0)'}:{y:35,opacity:0}),rotation:i%2?4:-4,scale:.9,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 94%',once:true}}));
+ gsap.from('.featured-logos img',{y:40,opacity:0,stagger:.12,duration:.8,scrollTrigger:{trigger:'.featured-logos',start:'top 95%',once:true}});
  gsap.from('.brand-billboard img',{xPercent:-18,rotation:-6,opacity:.1,scrollTrigger:{trigger:'.brand-billboard',start:'top bottom',end:'center center',scrub:1}});
  gsap.utils.toArray('.service-icon').forEach(el=>gsap.to(el,{rotation:90,scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:1}}));
- gsap.from('.studio-photo',{...(matchMedia('(min-width: 992px)').matches?{clipPath:'inset(20% 0 20% 0)'}:{y:35,opacity:0}),duration:1.3,scrollTrigger:{trigger:'.studio-photo',start:'top 90%'}});
- gsap.from('.behind-scenes a',{y:60,rotation:-7,opacity:0,stagger:.18,duration:1,scrollTrigger:{trigger:'.behind-scenes',start:'top 95%'}});
+ gsap.from('.studio-photo',{...(matchMedia('(min-width: 992px)').matches?{clipPath:'inset(20% 0 20% 0)'}:{y:35,opacity:0}),duration:1.3,scrollTrigger:{trigger:'.studio-photo',start:'top 90%',once:true}});
+ gsap.from('.behind-scenes a',{y:60,rotation:-7,opacity:0,stagger:.18,duration:1,scrollTrigger:{trigger:'.behind-scenes',start:'top 95%',once:true}});
  return()=>{cleanups.forEach(fn=>fn());gsap.killTweensOf(word)};
 });
 motionContext.add(motionOverride?'(min-width: 992px) and (pointer: fine)':'(min-width: 992px) and (pointer: fine) and (prefers-reduced-motion: no-preference)',()=>{
  gsap.to('.kinetic-art',{y:100,rotation:8,scrollTrigger:{trigger:'.hero-stage',start:'top top',end:'bottom top',scrub:1}});
  gsap.to('.hero-film>img',{yPercent:-12,ease:'none',scrollTrigger:{trigger:'.hero-film',start:'top bottom',end:'bottom top',scrub:1}});
  gsap.utils.toArray('.work-item').forEach((el,i)=>gsap.fromTo(el,{y:i%2?65:0},{y:i%2?-45:-25,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:1}}));
- let lenis,alive=true;loadScript('vendor/lenis.804047c1d9.js').then(()=>{if(!alive)return;lenis=new Lenis({duration:1.05,anchors:true});lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(tick);gsap.ticker.lagSmoothing(0)}).catch(()=>{});function tick(time){if(!document.hidden)lenis?.raf(time*1000)}return()=>{alive=false;gsap.ticker.remove(tick);lenis?.destroy()}
+
 });
 }catch{/* Content and native navigation remain visible. */}}
 document.querySelectorAll('details').forEach(d=>d.addEventListener('toggle',()=>window.ScrollTrigger?.refresh()));

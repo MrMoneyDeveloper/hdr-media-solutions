@@ -13,4 +13,12 @@ body.motion-off .mouse-cursor{display:none}
 
 .motion-label{font-size:9px;letter-spacing:.13em;color:#aaa;white-space:nowrap}.motion-label span{color:var(--accent);margin-left:8px}
 @media(max-width:600px){.hero-top>.motion-label{font-size:7px;max-width:none}.hero-copy p.static-agency-copy{font-size:11px;margin-top:16px;margin-bottom:18px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:smooth}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Native scroll owns page position; smooth movement is only requested by navigation clicks. */
+html{scroll-behavior:auto;scrollbar-gutter:stable}
+.work-image,.studio-photo,.hero-film{border:1px solid rgba(255,255,255,.24)}
+.behind-scenes a{display:block;border:1px solid rgba(255,255,255,.24);padding:5px;background:#151516;overflow:hidden}
+.floating-frame{border:1px solid rgba(255,255,255,.38)}
+.work-meta{padding-top:23px}.work-grid{row-gap:80px}.behind-scenes{margin-top:35px;gap:22px}
+@media(max-width:600px){.work-grid{row-gap:42px}.work-meta{padding-top:19px}.behind-scenes{gap:12px;margin-top:28px}.behind-scenes a{padding:3px}}

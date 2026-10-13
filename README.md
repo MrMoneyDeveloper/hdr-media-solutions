@@ -2,7 +2,7 @@
 
 Single-page static site. Serve `dist/` with any static HTTP server. No build required.
 
-Black, silver and brand yellow (#FFDB15) design, Bootstrap grid containers, GSAP 3.13 + ScrollTrigger, Lenis 1.3.11, Splide 4.1.4, GLightbox 3.3.1. Libraries are vendored locally with their original license headers. Supporting scripts load on demand. Native touch scrolling is supported. Motion is always enabled as requested.
+Black, silver and brand yellow (#FFDB15) design, Bootstrap grid containers, GSAP 3.13 + ScrollTrigger, Splide 4.1.4, GLightbox 3.3.1. Libraries are vendored locally with their original license headers. Supporting scripts load on demand. Native touch scrolling is supported. Motion is always enabled as requested.
 
 Content and assets: supplied pitch deck and logo, plus the existing HDR website and its portfolio stills. All 22 client logos from the deck appear in the expandable client network. Production photographs and all six existing portfolio thumbnails are included. Duplicate logos, the deck's decorative background, stock portrait and QR code are not used as website content. No pricing or performance quantities are shown.
 
@@ -38,3 +38,5 @@ Pages configuration is preserved separately in `wrangler.pages.jsonc`. For Git i
 Motion runs by default on desktop and mobile, even when the device requests reduced motion, as requested by the site owner. Continuous animations pause outside their section and when the tab is hidden, then resume automatically. The control to disable motion has been removed. The site works without JavaScript; galleries and animation are progressive enhancements.
 
 Google indexing starts only after public launch on hdrmediasolutions.co.za; the Sites review remains private. Follow the public-launch steps above after Cloudflare DNS/custom-domain setup. No Cloudflare account or DNS changes have been made in this task.
+
+Scroll fix: wheel/touch use native scrolling. Only explicit anchor clicks request smooth movement. Global CSS smooth scrolling and the Lenis controller are disabled, avoiding competing scroll writes during ScrollTrigger layout refreshes and lazy slider initialization. Mobile address-bar resizes do not rebuild scroll effects. Fine photo borders and slightly increased portfolio spacing are included.
