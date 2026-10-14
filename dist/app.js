@@ -2,11 +2,12 @@ const menu=document.querySelector('.menu'),nav=document.querySelector('nav');men
 document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{const hash=link.getAttribute('href');if(!hash||hash==='#')return;const target=document.getElementById(hash.slice(1));if(!target)return;event.preventDefault();history.pushState(null,'',hash);target.scrollIntoView({behavior:'smooth',block:'start'})}));
 // Keep the poster's dimensions while loading one requested YouTube player at a time.
 let activeVideoFrame=null;
+function resetVideo(){if(activeVideoFrame){activeVideoFrame.querySelector('iframe')?.remove();activeVideoFrame.querySelector('.video-launch').hidden=false;activeVideoFrame=null}}
 document.querySelectorAll('.video-launch').forEach(link=>link.addEventListener('click',event=>{
  if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
- const videoId=link.dataset.video;if(!/^[\w-]{11}$/.test(videoId))return;
+ const videoId=link.dataset.video;if(!videoId){resetVideo();return}if(!/^[\w-]{11}$/.test(videoId))return;
  event.preventDefault();
- if(activeVideoFrame){activeVideoFrame.querySelector('iframe')?.remove();activeVideoFrame.querySelector('.video-launch').hidden=false}
+ resetVideo();
  const frame=link.closest('.video-frame'),player=document.createElement('iframe');
  player.src=`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0`;
  player.title=link.dataset.title;player.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';player.allowFullscreen=true;player.referrerPolicy='strict-origin-when-cross-origin';
