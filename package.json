@@ -4,7 +4,7 @@
   "private": true,
   "description": "HDR Media Solutions static website for Cloudflare Workers and Pages",
   "scripts": {
-    "check": "node --check dist/app.js",
+    "check": "node --check dist/app.js && node --check dist/legal.js",
     "preview": "wrangler dev",
     "deploy": "wrangler deploy",
     "deploy:check": "wrangler deploy --dry-run --outdir .wrangler/dryrun",

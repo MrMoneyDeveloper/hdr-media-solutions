@@ -12,6 +12,9 @@
 /app.js
   Cache-Control: public, max-age=0, must-revalidate
 
+/legal.js
+  Cache-Control: public, max-age=0, must-revalidate
+
 /style.css
   Cache-Control: public, max-age=0, must-revalidate
 
