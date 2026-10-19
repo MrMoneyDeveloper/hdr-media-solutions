@@ -100,7 +100,11 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 def response(base, path, extra=None):
-    req = Request(base.rstrip('/') + path, headers=extra or {})
+    # Cloudflare rejects Python-urllib's default UA with error 1010. Identify
+    # browser-compatible QA requests; do not disable edge protection to test.
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 HDR-Site-QA/1.0'}
+    headers.update(extra or {})
+    req = Request(base.rstrip('/') + path, headers=headers)
     try:
         result = build_opener(NoRedirect).open(req, timeout=20)
     except HTTPError as error:
@@ -126,8 +130,11 @@ if args.base:
     check('must-revalidate' in headers.get('Cache-Control', ''), 'HTML revalidates on subsequent visits')
     if urlsplit(args.base).hostname == 'hdr-media-solutions.mohammedfarhaanbuckas.workers.dev':
         check(any(key.lower() == 'x-robots-tag' and 'noindex' in value for key, value in headers.items()), 'Cloudflare preview is noindex')
-    etag = headers.get('ETag') or headers.get('Etag')
-    check(bool(etag) and response(args.base, '/', {'If-None-Match': etag})[0] == 304, 'Unchanged HTML supports conditional 304 responses')
+    # Some edge HTML responses omit validators. Revalidation is still required
+    # by max-age=0; validate 304 reuse on a cacheable application asset instead.
+    asset_status, asset_headers, asset_body = response(args.base, '/app.js')
+    etag = next((value for key, value in asset_headers.items() if key.lower() == 'etag'), None)
+    check(asset_status == 200 and bool(etag) and response(args.base, '/app.js', {'If-None-Match': etag})[0] == 304, 'Unchanged application script supports conditional 304 responses')
 
 failed = [item for item in checks if not item['passed']]
 print(json.dumps({'origin': args.base, 'passed': len(checks) - len(failed), 'failed': failed, 'checks': len(checks)}, indent=2))

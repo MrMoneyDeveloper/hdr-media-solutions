@@ -32,7 +32,7 @@ Reviewed on **19 October 2026** against the supplied chat and the final approved
 
 ## Verification performed
 
-- **223 automated assertions passed** against the local Workers preview: content/order, approved video IDs, logo removals, image dimensions/alt attributes, unique IDs, internal links/anchors, local/dynamic assets, metadata, parsed JSON-LD, sitemap, HTTP resources, legacy 301s, genuine branded 404 and ETag/304 revalidation. The same audit is run against the public origin after publication.
+- **223 automated assertions passed locally and 224 passed against the deployed Cloudflare origin**, with zero failures: content/order, approved video IDs, logo removals, image dimensions/alt attributes, unique IDs, internal links/anchors, local/dynamic assets, metadata, parsed JSON-LD, sitemap, HTTP resources, legacy 301s, genuine branded 404 and ETag/304 asset reuse. The public run also checks the preview's host-specific `noindex` header. Cloudflare Workers Builds completed successfully for the functional release.
 - `npm run check`, `npm run deploy:check` and `git diff --check` passed. Terms were regenerated from the supplied Markdown with all 22 sections.
 - Browser layouts checked at **320, 390, 768, 1024 and 1440 px**. Content/control bounds fit the viewport, brand columns adapt and video frames retain 16:9 dimensions. Animated orbit/marquee artwork intentionally extends into a clipped horizontal region; it does not create horizontal page navigation.
 - Mobile menu opens, its links navigate, and Escape closes it and focuses its button. Expertise disclosures were all collapsed and reopened successfully.
@@ -43,6 +43,7 @@ Reviewed on **19 October 2026** against the supplied chat and the final approved
 - Terms contents opens/collapses on phones, its 22 links reach the matching headings, and the contents sidebar opens on desktop. No restored privacy placeholder appears in either footer.
 - Isolated failure fixtures deliberately removed the app script and failed font/vendor/thumbnail requests. Navigation/content/native disclosures remained available without the app. With vendor scripts unavailable, the app menu worked, both testimonials were shown and bottom scrolling stayed stable. External thumbnail failure retained fixed video frames, labels and direct watch links.
 - The Afrihost ZIP is checked for archive integrity, flat root layout and presence of `.htaccess`, homepage, Terms and 404 page. It excludes source files, credentials, Git metadata, Node dependencies and Cloudflare-only configuration.
+- Cloudflare's browser-integrity check rejected the default Python-urllib user agent (1010). The repeatable audit identifies browser-compatible QA requests; normal browser/curl delivery was checked and no edge protection was disabled. Live HTML revalidates with a fresh 200 response where its edge response omits an ETag; application JS/CSS/fonts support ETag/304 reuse. The public audit checks the actual asset-cache behavior rather than assuming an HTML validator.
 
 ## Search and loading preparation
 
