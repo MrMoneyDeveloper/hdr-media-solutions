@@ -60,6 +60,7 @@ for file, doc in documents.items():
     check(len(ids) == len(set(ids)), f'{relative}: unique IDs')
     check(all('width' in a and 'height' in a and 'alt' in a for t, a in doc.tags if t == 'img'), f'{relative}: images have dimensions and alt attributes')
     check('\ufffd' not in file.read_text(encoding='utf-8'), f'{relative}: valid text encoding')
+    check(not re.search('[\u2197\u2198\u2733\u25b6\ufe0f]', ''.join(doc.text)), f'{relative}: decorative icons cannot become colour emoji')
     for tag, attrs in doc.tags:
         for key in ('src', 'href'):
             ref = attrs.get(key, '')

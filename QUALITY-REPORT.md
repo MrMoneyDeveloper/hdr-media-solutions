@@ -68,3 +68,11 @@ References used for the hosting/search rules: [Afrihost upload guide](https://he
 The owner reported sideways scrolling on a physical phone after the original review. The tilted marquee was wider than the document, and rotated orbit artwork could also extend outside the viewport. Root-only `overflow-x: clip` was insufficient. The fix contains the opening artwork inside its section, clips the marquee inside an untransformed full-width wrapper, permits the two-column opening grid to shrink, and applies horizontal containment to both HTML and body with a `hidden` fallback for browsers without `clip`. Native vertical scrolling, zoom, video controls and slider gestures are not intercepted with JavaScript.
 
 The CSS cache version was advanced on the homepage and generated Terms page. Responsive regression checks now compare **both document and body scroll widths with the document client width**, rather than treating off-screen decorative bounds as acceptable. The preview was checked at phone/tablet/desktop widths from 320 to 1440 px, during animation and at the strip, testimonial slider and footer, with horizontal input attempts. The browser used is Chromium; the owner can confirm the physical-phone result after the deployed fix.
+
+## iPhone icon rendering correction — 19 October 2026
+
+Client iPhone screenshots exposed Apple colour-emoji substitution for Unicode arrows, play triangles and the eight-spoked star. The contact background used the star as a 400px text glyph, so its opaque green emoji covered the copy. Previous Chromium checks did not detect this platform difference.
+
+Replaced every such homepage and Terms icon with inline, currentColor SVG paths (decorative and hidden from accessibility). Replaced the contact pseudo-element glyph with a local SVG background at 7% opacity. Existing GSAP targets and motion remain intact. Direction CSS cache version is now v14. The Terms generator preserves the same SVG treatment. The content audit now rejects these emoji-prone text characters in generated pages.
+
+Validated responsive widths 320, 390, 430, 768 and 1440: document and body scroll widths match the root client width. Visually checked the opening, star, play button, contact and footer. Browser verification uses Chromium, not a physical iPhone; the glyphs no longer rely on any operating-system font renderer.
