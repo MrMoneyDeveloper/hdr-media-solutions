@@ -17,8 +17,12 @@ The complete, owner-supplied Terms of Service (effective 14 October 2026) is pub
 
 Locally hosted libraries include GSAP with ScrollTrigger and a lazy-loaded Splide testimonial slider. Unused gallery/scroll libraries are retained as optional assets, but are not loaded by the page.
 
+Fonts are now self-hosted variable WOFF2 files (DM Sans and Manrope, about 62 KB combined), preloaded on the homepage with `font-display: swap`. Font loading no longer depends on Google Fonts' servers; system sans-serif remains the fallback. Their original SIL Open Font License notices are included in `licenses/` and the Afrihost package. If application JavaScript is unavailable, mobile navigation stays visible, native expertise disclosures still work, both testimonials remain readable and video links open YouTube. If animation/slider libraries fail, primary content and the mobile menu remain usable. The mobile menu also closes with Escape and returns keyboard focus to its button.
+
 ## Public launch and search
 Production preview is public at https://hdr-media-solutions.mohammedfarhaanbuckas.workers.dev/. The existing WordPress site at hdrmediasolutions.co.za has not been replaced. The canonical, sitemap and social image URLs are configured for the client's intended domain; update these together if the final domain changes. After connecting that domain, verify it in Google Search Console, submit /sitemap.xml, and inspect the homepage. Rankings or traffic improvements are not guaranteed.
+
+The Cloudflare preview now has a host-specific `X-Robots-Tag: noindex` header so search engines are directed toward the intended production domain rather than a duplicate preview. This rule does not apply to hdrmediasolutions.co.za. Social-preview asset URLs on the production domain must be checked after uploading the release there; that domain still serves the old site today.
 
 No build needed. For local preview: `python -m http.server 4173 --directory dist` then open http://localhost:4173. The source ZIP includes the static files, locally hosted libraries and README, without hosting credentials or Git metadata.
 
@@ -35,6 +39,18 @@ Pages configuration is preserved separately in `wrangler.pages.jsonc`. For Git i
 Motion runs by default on desktop and mobile, even when the device requests reduced motion, as requested by the site owner. Continuous animations pause outside their section and when the tab is hidden, then resume automatically. The control to disable motion has been removed. The site works without JavaScript; galleries and animation are progressive enhancements.
 
 The GitHub main branch drives Cloudflare Workers Builds. No Cloudflare DNS/custom-domain changes have been made in this task.
+
+## Afrihost handover
+
+Run `python scripts/package-afrihost.py` to generate `HDR-Media-Solutions-afrihost.zip` and a SHA-256 checksum in the parent workspace. Extract the ZIP's contents directly into the confirmed domain document root, usually `public_html`; there is no enclosing `dist` folder. The archive includes an Apache-compatible `.htaccess` for HTTPS/canonical-host redirects, legacy routes, cache headers, text compression and the branded 404. Cloudflare-only `_headers` and `_redirects` are excluded. No Node server, database, application secrets or build command is required on Afrihost.
+
+Read [the deployment and rollback instructions](hosting/AFRIHOST-DEPLOYMENT.md) before uploading. The existing WordPress site and database must be backed up outside the public web folder first. Afrihost account/server access has not been supplied, so its actual modules, `.htaccess` permissions, SSL, DNS, live redirects and caching still require staging/production verification. Automatic Afrihost-to-Cloudflare failover is not configured; rollback uses the verified backup or release archive. The email button opens a mail app; direct form-to-inbox delivery still needs a mail service/backend if requested.
+
+## Quality checks
+
+Run `python scripts/audit-site.py --base http://127.0.0.1:4183` after starting `npm run preview -- --port 4183`. The audit checks agreed content/order, removed logos/placeholders, video IDs, native image dimensions, internal assets/anchors, legal sections, search metadata, JSON-LD, sitemap, HTTP asset responses, redirects, conditional caching and a real 404. It accepts `--base` with the public preview origin to repeat HTTP checks after deployment.
+
+For deliberately unavailable app scripts, animation libraries, fonts and video posters, `python scripts/qa-failure-server.py` serves isolated localhost fixtures on port 4184. This diagnostic server is not included in either deployed website. Browser QA also covers 320, 390, 768, 1024 and 1440 px layouts, video player controls/switching, stable footer scrolling, expertise disclosures, testimonials, keyboard menu dismissal and the legal page's responsive contents. See `QUALITY-REPORT.md` for the latest scope and remaining hosting checks.
 
 Scroll fix: wheel/touch use native scrolling. Only explicit anchor clicks request smooth movement. Global CSS smooth scrolling and the Lenis controller are disabled, avoiding competing scroll writes during ScrollTrigger layout refreshes and lazy slider initialization. Mobile address-bar resizes do not rebuild scroll effects. Film thumbnails and players have fixed dimensions. Additional showreel waveform, film graphic and contact motion pause off-screen and in hidden tabs.
 

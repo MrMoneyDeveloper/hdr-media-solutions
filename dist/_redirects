@@ -1,5 +1,5 @@
-/portfolio /#services 301
-/portfolio/ /#services 301
+/portfolio /#films 301
+/portfolio/ /#films 301
 /services /#services 301
 /services/ /#services 301
 /about-us /#services 301
@@ -7,5 +7,7 @@
 /contact-us /#contact 301
 /contact-us/ /#contact 301
 
-/clients /#services 301
-/clients/ /#services 301
+/clients /#clients 301
+/clients/ /#clients 301
+/under-construction / 301
+/under-construction/ / 301

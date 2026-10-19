@@ -32,3 +32,6 @@ https://:project.pages.dev/*
 
 https://:version.:project.pages.dev/*
   X-Robots-Tag: noindex
+
+https://hdr-media-solutions.mohammedfarhaanbuckas.workers.dev/*
+  X-Robots-Tag: noindex
