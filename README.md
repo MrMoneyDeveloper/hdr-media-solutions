@@ -59,3 +59,5 @@ Verified old-site social URLs:
 - https://www.facebook.com/hdrmediasolutions
 
 The old homepage's outgoing links and WordPress public page index did not contain Privacy Policy or Terms of Service pages when checked on 2026-10-13. The subsequently supplied Terms are now published. The supplied Google profile and review URLs are now live. Do not restore the removed Privacy Policy placeholder without a new owner request. Do not add arbitrary YouTube videos or old portfolio links. Direct form-to-inbox delivery would require a mail provider or configured backend.
+
+Mobile horizontal-scroll correction (19 October 2026): rotating opening artwork and the tilted service strip are clipped inside local, untransformed containers. The opening grid can shrink; HTML and body both have horizontal containment with an older-browser fallback. This avoids depending on root-only `overflow-x: clip`. No touch/wheel cancellation or global `touch-action` restriction is used. CSS URLs are versioned on both pages; recheck document and body `scrollWidth` against the root `clientWidth` after animation and slider initialization.
